@@ -25,7 +25,7 @@ A premium, high-performance IPL live streaming dashboard built with **React**, *
 - **Build Tool**: [Vite 6](https://vite.dev/)
 - **Styling**: Vanilla CSS (CSS Variables)
 - **Icons**: Custom SVGs & Lucide-inspired components
-- **Deployment**: [Vercel](https://vercel.com/) / [Cloudflare Pages](https://pages.cloudflare.com/)
+- **Deployment**: [Vercel](https://vercel.com/)
 
 ## 🚀 Getting Started
 

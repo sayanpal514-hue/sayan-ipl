@@ -46,6 +46,18 @@ A premium, high-performance IPL live streaming dashboard built with **React**, *
    npm run build
    ```
 
+## 🤝 Usage & Contribution
+
+This project is **free to use**! 
+1. **Fork** this repository first to get your own copy.
+2. Customize it to your heart's content.
+3. Deploy it following the instructions above.
+
+---
+
+### ⚠️ Disclaimer
+**Made for educational purposes.** I do not host any streaming links; all links provided/used are publicly available on the internet.
+
 ## 🌐 Live Demo
 
 You can view the live application here: **[sayan-ipl.vercel.app](https://github.com/sayanpal514-hue/IPL)** *(Note: Replace with your actual deployment URL)*

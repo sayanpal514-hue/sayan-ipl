@@ -1,16 +1,54 @@
-# React + Vite
+# 🏏 Sayan IPL - 2026 Live Streaming
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A premium, high-performance IPL live streaming dashboard built with **React**, **Vite**, and **Vanilla CSS**. This application provides a seamless experience for monitoring live matches, schedules, and team statistics with a stunning modern interface.
 
-Currently, two official plugins are available:
+## ✨ Key Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- 🌓 **Dynamic Theming**: Seamlessly switch between a deep-blue Dark Mode and a crisp, modern Light Mode. Your preference is automatically saved!
+- 🏆 **Official Team Logos**: Integrated with all 10 official IPL team logos (CSK, MI, RCB, SRH, KKR, DC, RR, PBKS, GT, LSG).
+- 📺 **Live Match Alerts**: Real-time "LIVE" indicators and a sleek top navigation strip for quick access.
+- 📱 **Fully Responsive**: Optimized for desktop, tablet, and mobile viewing.
+- ⚡ **Turbo Performance**: Built with Vite for lightning-fast load times and smooth transitions.
+- ☁️ **Deployment Ready**: Fully configured for one-click deployment to **Vercel** or **Cloudflare Pages**.
 
-## React Compiler
+## 📸 Screenshots
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Dark Mode (Premium Experience)
+![Sayan IPL Dark Mode](./src/assets/screenshots/dark.png)
 
-## Expanding the ESLint configuration
+### Light Mode (Modern & Clean)
+![Sayan IPL Light Mode](./src/assets/screenshots/light.png)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack
+
+- **Frontend**: [React 19](https://react.dev/)
+- **Build Tool**: [Vite 6](https://vite.dev/)
+- **Styling**: Vanilla CSS (CSS Variables)
+- **Icons**: Custom SVGs & Lucide-inspired components
+- **Deployment**: [Vercel](https://vercel.com/) / [Cloudflare Pages](https://pages.cloudflare.com/)
+
+## 🚀 Getting Started
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/sayanpal514-hue/IPL.git
+   ```
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+3. **Run the development server**:
+   ```bash
+   npm run dev
+   ```
+4. **Build for production**:
+   ```bash
+   npm run build
+   ```
+
+## 🌐 Live Demo
+
+You can view the live application here: **[sayan-ipl.vercel.app](https://github.com/sayanpal514-hue/IPL)** *(Note: Replace with your actual deployment URL)*
+
+---
+Developed with ❤️ by **Sayan Pal**

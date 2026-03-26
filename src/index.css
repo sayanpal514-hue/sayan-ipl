@@ -1,0 +1,37 @@
+:root {
+  /* Dark Mode (Default) */
+  --bg-gradient: radial-gradient(ellipse 90% 50% at 50% 0%, #0b1928 0%, #05080e 65%);
+  --header-bg: #070e1acc;
+  --card-bg: #0c1018;
+  --card-bg-alt: #0d1624;
+  --card-border: #0f1e30;
+  --text-primary: #ffffff;
+  --text-secondary: #c0d0e0;
+  --text-muted: #1a3050;
+  --tab-bg: #070d18;
+  --tab-btn-bg: #112030;
+  --tab-btn-text: #1a2a3a;
+  --strip-bg: #080e18;
+  --strip-border: #0d1828;
+}
+
+[data-theme="light"] {
+  --bg-gradient: radial-gradient(ellipse 90% 50% at 50% 0%, #f0f7ff 0%, #f8fafc 65%);
+  --header-bg: #ffffffcc;
+  --card-bg: #ffffff;
+  --card-bg-alt: #f1f5f9;
+  --card-border: #e2e8f0;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --tab-bg: #f8fafc;
+  --tab-btn-bg: #e2e8f0;
+  --tab-btn-text: #64748b;
+  --strip-bg: #f1f5f9;
+  --strip-border: #e2e8f0;
+}
+
+body {
+  margin: 0;
+  transition: background-color 0.3s ease;
+}

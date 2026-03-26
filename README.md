@@ -31,7 +31,7 @@ A premium, high-performance IPL live streaming dashboard built with **React**, *
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/sayanpal514-hue/IPL.git
+   git clone https://github.com/sayanpal514-hue/sayan-ipl.git
    ```
 2. **Install dependencies**:
    ```bash

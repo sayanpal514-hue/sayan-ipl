@@ -400,9 +400,10 @@ function PlayerModal({ match, onClose }) {
                 background: channelIdx === i ? "#f97316" : "#1a2535",
                 border: channelIdx === i ? "1px solid #f97316" : "1px solid #243040",
                 color: channelIdx === i ? "#fff" : "#8090a0",
-                borderRadius: 7, padding: "4px 8px", cursor: "pointer",
-                fontSize: 9, fontWeight: 700, whiteSpace: "nowrap"
-              }}>{s.name.replace("Star Sports 1 ", "")}</button>
+                borderRadius: 7, padding: "5px 10px", cursor: "pointer",
+                fontSize: 11, fontWeight: 900, whiteSpace: "nowrap",
+                boxShadow: channelIdx === i ? "0 0 8px #f9731666" : "none"
+              }}>{s.name.replace("Star Sports 1 ", "").toUpperCase()}</button>
             ))}
           </div>
           <button onClick={onClose} style={{ background: "#1a2535", border: "1px solid #243040", color: "#8090a0", borderRadius: 9, padding: "5px 14px", cursor: "pointer", fontSize: 13, fontWeight: 700 }}>✕</button>
@@ -416,7 +417,12 @@ function PlayerModal({ match, onClose }) {
       <div style={{ background: "#070c14", borderTop: "1px solid #0d1a28", padding: "6px 14px", display: "flex", justifyContent: "space-between", alignItems: "center", flexShrink: 0 }}
         onClick={e => e.stopPropagation()}>
         <span style={{ color: "#1e3040", fontSize: 10 }}>Powered by <span style={{ color: "#f97316", fontWeight: 700 }}>SAYAN-IPTV</span></span>
-        <a href={currentStream.url} target="_blank" rel="noopener noreferrer" style={{ color: "#2a5a80", fontSize: 10, textDecoration: "none", fontWeight: 600 }}>Open in new tab ↗</a>
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <a href="https://whatsapp.com/channel/0029VbC2oQsC6ZvmwpR3v73v" target="_blank" rel="noopener noreferrer" style={{ background: "#25D366", color: "#fff", fontSize: 10, fontWeight: 800, padding: "4px 10px", borderRadius: 6, textDecoration: "none", display: "flex", alignItems: "center", gap: 4 }}>
+            <span>📱</span> WHATSAPP
+          </a>
+          <a href={currentStream.url} target="_blank" rel="noopener noreferrer" style={{ color: "#2a5a80", fontSize: 10, textDecoration: "none", fontWeight: 600 }}>Open in new tab ↗</a>
+        </div>
       </div>
     </div>
   );
@@ -578,6 +584,9 @@ export default function App() {
             <div style={{ fontSize: 8, color: "var(--text-muted)", letterSpacing: 2, fontWeight: 700 }}>IPL 2026 LIVE STREAMING</div>
           </div>
           <div style={{ flex: 1 }} />
+          <a href="https://whatsapp.com/channel/0029VbC2oQsC6ZvmwpR3v73v" target="_blank" rel="noopener noreferrer" style={{ background: "#25D366", color: "#fff", border: "none", borderRadius: 10, padding: "0 12px", height: 36, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", marginRight: 10, fontSize: 10, fontWeight: 900, textDecoration: "none", gap: 6 }}>
+            <span>📱</span> CHANNEL
+          </a>
           <button onClick={toggleTheme} style={{ background: "var(--tab-btn-bg)", border: "1px solid var(--card-border)", color: "var(--text-primary)", borderRadius: 10, width: 36, height: 36, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", marginRight: 10, fontSize: 18 }}>
             {theme === "dark" ? "☀️" : "🌙"}
           </button>
@@ -615,7 +624,9 @@ export default function App() {
               <div>
                 <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 3 }}><LiveBadge /></div>
                 <div style={{ color: "#fff", fontWeight: 800, fontSize: 13 }}>{liveNow[0].homeShort} vs {liveNow[0].awayShort}</div>
-                <div style={{ color: "rgba(255,255,255,0.6)", fontSize: 10 }}>Hindi HD · English HD · {liveNow[0].matchType === "day" ? "2:00 PM – 8:00 PM" : "6:00 PM – 2:00 AM"} IST</div>
+                <div style={{ color: "rgba(255,255,255,0.9)", fontSize: 11, fontWeight: 900 }}>
+                  <span style={{ color: "#f97316" }}>HINDI HD</span> · <span style={{ color: "#f97316" }}>ENGLISH HD</span> · {liveNow[0].matchType === "day" ? "2:00 PM – 8:00 PM" : "6:00 PM – 2:00 AM"} IST
+                </div>
               </div>
               <TeamLogo team={liveNow[0].awayShort} size={36} />
             </div>

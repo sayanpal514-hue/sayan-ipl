@@ -1,7 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 
 const JSON_URL = null;
-const STREAM_URL = "https://star-sport-1-hindi-sayan.pages.dev/";
+const STREAMS = [
+  { name: "Star Sports 1 Hindi HD", url: "https://sportlink-sayan.netlify.app/" },
+  { name: "Star Sports 1 English HD", url: "https://sportlink-starsport1hd.netlify.app/" }
+];
 
 // ─── IST Time Helpers ─────────────────────────────────────────────────────────
 function getIST() {
@@ -243,76 +246,76 @@ const TeamLogo = ({ team, size = 52 }) => {
 // ─── Match Data ───────────────────────────────────────────────────────────────
 const MOCK_DATA = {
   matches: [
-    { id:1,  date:"28/03/26", day:"Sat", home:"Royal Challengers Bengaluru", away:"Sunrisers Hyderabad",         homeShort:"RCB", awayShort:"SRH", venue:"Bengaluru", matchType:"evening", streamUrl:STREAM_URL },
-    { id:2,  date:"29/03/26", day:"Sun", home:"Mumbai Indians",               away:"Kolkata Knight Riders",       homeShort:"MI",  awayShort:"KKR", venue:"Mumbai",    matchType:"evening", streamUrl:STREAM_URL },
-    { id:3,  date:"30/03/26", day:"Mon", home:"Rajasthan Royals",             away:"Chennai Super Kings",         homeShort:"RR",  awayShort:"CSK", venue:"Guwahati",  matchType:"evening", streamUrl:STREAM_URL },
-    { id:4,  date:"31/03/26", day:"Tue", home:"Punjab Kings",                 away:"Gujarat Titans",              homeShort:"PBKS",awayShort:"GT",  venue:"New Chandigarh", matchType:"evening", streamUrl:STREAM_URL },
-    { id:5,  date:"01/04/26", day:"Wed", home:"Lucknow Super Giants",         away:"Delhi Capitals",              homeShort:"LSG", awayShort:"DC",  venue:"Lucknow",   matchType:"evening", streamUrl:STREAM_URL },
-    { id:6,  date:"02/04/26", day:"Thu", home:"Kolkata Knight Riders",        away:"Sunrisers Hyderabad",         homeShort:"KKR", awayShort:"SRH", venue:"Kolkata",   matchType:"evening", streamUrl:STREAM_URL },
-    { id:7,  date:"03/04/26", day:"Fri", home:"Chennai Super Kings",          away:"Punjab Kings",                homeShort:"CSK", awayShort:"PBKS",venue:"Chennai",   matchType:"evening", streamUrl:STREAM_URL },
-    { id:8,  date:"04/04/26", day:"Sat", home:"Delhi Capitals",               away:"Mumbai Indians",              homeShort:"DC",  awayShort:"MI",  venue:"Delhi",     matchType:"day",     streamUrl:STREAM_URL },
-    { id:9,  date:"04/04/26", day:"Sat", home:"Gujarat Titans",               away:"Rajasthan Royals",            homeShort:"GT",  awayShort:"RR",  venue:"Ahmedabad", matchType:"evening", streamUrl:STREAM_URL },
-    { id:10, date:"05/04/26", day:"Sun", home:"Sunrisers Hyderabad",          away:"Lucknow Super Giants",        homeShort:"SRH", awayShort:"LSG", venue:"Hyderabad", matchType:"day",     streamUrl:STREAM_URL },
-    { id:11, date:"05/04/26", day:"Sun", home:"Royal Challengers Bengaluru",  away:"Chennai Super Kings",         homeShort:"RCB", awayShort:"CSK", venue:"Bengaluru", matchType:"evening", streamUrl:STREAM_URL },
-    { id:12, date:"06/04/26", day:"Mon", home:"Kolkata Knight Riders",        away:"Punjab Kings",                homeShort:"KKR", awayShort:"PBKS",venue:"Kolkata",   matchType:"evening", streamUrl:STREAM_URL },
-    { id:13, date:"07/04/26", day:"Tue", home:"Rajasthan Royals",             away:"Mumbai Indians",              homeShort:"RR",  awayShort:"MI",  venue:"Guwahati",  matchType:"evening", streamUrl:STREAM_URL },
-    { id:14, date:"08/04/26", day:"Wed", home:"Delhi Capitals",               away:"Gujarat Titans",              homeShort:"DC",  awayShort:"GT",  venue:"Delhi",     matchType:"evening", streamUrl:STREAM_URL },
-    { id:15, date:"09/04/26", day:"Thu", home:"Kolkata Knight Riders",        away:"Lucknow Super Giants",        homeShort:"KKR", awayShort:"LSG", venue:"Kolkata",   matchType:"evening", streamUrl:STREAM_URL },
-    { id:16, date:"10/04/26", day:"Fri", home:"Rajasthan Royals",             away:"Royal Challengers Bengaluru", homeShort:"RR",  awayShort:"RCB", venue:"Guwahati",  matchType:"evening", streamUrl:STREAM_URL },
-    { id:17, date:"11/04/26", day:"Sat", home:"Punjab Kings",                 away:"Sunrisers Hyderabad",         homeShort:"PBKS",awayShort:"SRH", venue:"New Chandigarh", matchType:"day",     streamUrl:STREAM_URL },
-    { id:18, date:"11/04/26", day:"Sat", home:"Chennai Super Kings",          away:"Delhi Capitals",              homeShort:"CSK", awayShort:"DC",  venue:"Chennai",   matchType:"evening", streamUrl:STREAM_URL },
-    { id:19, date:"12/04/26", day:"Sun", home:"Lucknow Super Giants",         away:"Gujarat Titans",              homeShort:"LSG", awayShort:"GT",  venue:"Lucknow",   matchType:"day",     streamUrl:STREAM_URL },
-    { id:20, date:"12/04/26", day:"Sun", home:"Mumbai Indians",               away:"Royal Challengers Bengaluru", homeShort:"MI",  awayShort:"RCB", venue:"Mumbai",    matchType:"evening", streamUrl:STREAM_URL },
-    { id:21, date:"13/04/26", day:"Mon", home:"Sunrisers Hyderabad",          away:"Rajasthan Royals",            homeShort:"SRH", awayShort:"RR",  venue:"Hyderabad", matchType:"evening", streamUrl:STREAM_URL },
-    { id:22, date:"14/04/26", day:"Tue", home:"Chennai Super Kings",          away:"Kolkata Knight Riders",       homeShort:"CSK", awayShort:"KKR", venue:"Chennai",   matchType:"evening", streamUrl:STREAM_URL },
-    { id:23, date:"15/04/26", day:"Wed", home:"Royal Challengers Bengaluru",  away:"Lucknow Super Giants",        homeShort:"RCB", awayShort:"LSG", venue:"Bengaluru", matchType:"evening", streamUrl:STREAM_URL },
-    { id:24, date:"16/04/26", day:"Thu", home:"Mumbai Indians",               away:"Punjab Kings",                homeShort:"MI",  awayShort:"PBKS",venue:"Mumbai",    matchType:"evening", streamUrl:STREAM_URL },
-    { id:25, date:"17/04/26", day:"Fri", home:"Gujarat Titans",               away:"Kolkata Knight Riders",       homeShort:"GT",  awayShort:"KKR", venue:"Ahmedabad", matchType:"evening", streamUrl:STREAM_URL },
-    { id:26, date:"18/04/26", day:"Sat", home:"Royal Challengers Bengaluru",  away:"Delhi Capitals",              homeShort:"RCB", awayShort:"DC",  venue:"Bengaluru", matchType:"day",     streamUrl:STREAM_URL },
-    { id:27, date:"18/04/26", day:"Sat", home:"Sunrisers Hyderabad",          away:"Chennai Super Kings",         homeShort:"SRH", awayShort:"CSK", venue:"Hyderabad", matchType:"evening", streamUrl:STREAM_URL },
-    { id:28, date:"19/04/26", day:"Sun", home:"Kolkata Knight Riders",        away:"Rajasthan Royals",            homeShort:"KKR", awayShort:"RR",  venue:"Kolkata",   matchType:"day",     streamUrl:STREAM_URL },
-    { id:29, date:"19/04/26", day:"Sun", home:"Punjab Kings",                 away:"Lucknow Super Giants",        homeShort:"PBKS",awayShort:"LSG", venue:"New Chandigarh", matchType:"evening", streamUrl:STREAM_URL },
-    { id:30, date:"20/04/26", day:"Mon", home:"Gujarat Titans",               away:"Mumbai Indians",              homeShort:"GT",  awayShort:"MI",  venue:"Ahmedabad", matchType:"evening", streamUrl:STREAM_URL },
-    { id:31, date:"21/04/26", day:"Tue", home:"Sunrisers Hyderabad",          away:"Delhi Capitals",              homeShort:"SRH", awayShort:"DC",  venue:"Hyderabad", matchType:"evening", streamUrl:STREAM_URL },
-    { id:32, date:"22/04/26", day:"Wed", home:"Lucknow Super Giants",         away:"Rajasthan Royals",            homeShort:"LSG", awayShort:"RR",  venue:"Lucknow",   matchType:"evening", streamUrl:STREAM_URL },
-    { id:33, date:"23/04/26", day:"Thu", home:"Mumbai Indians",               away:"Chennai Super Kings",         homeShort:"MI",  awayShort:"CSK", venue:"Mumbai",    matchType:"evening", streamUrl:STREAM_URL },
-    { id:34, date:"24/04/26", day:"Fri", home:"Royal Challengers Bengaluru",  away:"Gujarat Titans",              homeShort:"RCB", awayShort:"GT",  venue:"Bengaluru", matchType:"evening", streamUrl:STREAM_URL },
-    { id:35, date:"25/04/26", day:"Sat", home:"Delhi Capitals",               away:"Punjab Kings",                homeShort:"DC",  awayShort:"PBKS",venue:"Delhi",     matchType:"day",     streamUrl:STREAM_URL },
-    { id:36, date:"25/04/26", day:"Sat", home:"Rajasthan Royals",             away:"Sunrisers Hyderabad",         homeShort:"RR",  awayShort:"SRH", venue:"Jaipur",    matchType:"evening", streamUrl:STREAM_URL },
-    { id:37, date:"26/04/26", day:"Sun", home:"Gujarat Titans",               away:"Chennai Super Kings",         homeShort:"GT",  awayShort:"CSK", venue:"Ahmedabad", matchType:"day",     streamUrl:STREAM_URL },
-    { id:38, date:"26/04/26", day:"Sun", home:"Lucknow Super Giants",         away:"Kolkata Knight Riders",       homeShort:"LSG", awayShort:"KKR", venue:"Lucknow",   matchType:"evening", streamUrl:STREAM_URL },
-    { id:39, date:"27/04/26", day:"Mon", home:"Delhi Capitals",               away:"Royal Challengers Bengaluru", homeShort:"DC",  awayShort:"RCB", venue:"Delhi",     matchType:"evening", streamUrl:STREAM_URL },
-    { id:40, date:"28/04/26", day:"Tue", home:"Punjab Kings",                 away:"Rajasthan Royals",            homeShort:"PBKS",awayShort:"RR",  venue:"New Chandigarh", matchType:"evening", streamUrl:STREAM_URL },
-    { id:41, date:"29/04/26", day:"Wed", home:"Mumbai Indians",               away:"Sunrisers Hyderabad",         homeShort:"MI",  awayShort:"SRH", venue:"Mumbai",    matchType:"evening", streamUrl:STREAM_URL },
-    { id:42, date:"30/04/26", day:"Thu", home:"Gujarat Titans",               away:"Royal Challengers Bengaluru", homeShort:"GT",  awayShort:"RCB", venue:"Ahmedabad", matchType:"evening", streamUrl:STREAM_URL },
-    { id:43, date:"01/05/26", day:"Fri", home:"Rajasthan Royals",             away:"Delhi Capitals",              homeShort:"RR",  awayShort:"DC",  venue:"Jaipur",    matchType:"evening", streamUrl:STREAM_URL },
-    { id:44, date:"02/05/26", day:"Sat", home:"Chennai Super Kings",          away:"Mumbai Indians",              homeShort:"CSK", awayShort:"MI",  venue:"Chennai",   matchType:"evening", streamUrl:STREAM_URL },
-    { id:45, date:"03/05/26", day:"Sun", home:"Sunrisers Hyderabad",          away:"Kolkata Knight Riders",       homeShort:"SRH", awayShort:"KKR", venue:"Hyderabad", matchType:"day",     streamUrl:STREAM_URL },
-    { id:46, date:"03/05/26", day:"Sun", home:"Gujarat Titans",               away:"Punjab Kings",                homeShort:"GT",  awayShort:"PBKS",venue:"Ahmedabad", matchType:"evening", streamUrl:STREAM_URL },
-    { id:47, date:"04/05/26", day:"Mon", home:"Mumbai Indians",               away:"Lucknow Super Giants",        homeShort:"MI",  awayShort:"LSG", venue:"Mumbai",    matchType:"evening", streamUrl:STREAM_URL },
-    { id:48, date:"05/05/26", day:"Tue", home:"Delhi Capitals",               away:"Chennai Super Kings",         homeShort:"DC",  awayShort:"CSK", venue:"Delhi",     matchType:"evening", streamUrl:STREAM_URL },
-    { id:49, date:"06/05/26", day:"Wed", home:"Sunrisers Hyderabad",          away:"Punjab Kings",                homeShort:"SRH", awayShort:"PBKS",venue:"Hyderabad", matchType:"evening", streamUrl:STREAM_URL },
-    { id:50, date:"07/05/26", day:"Thu", home:"Lucknow Super Giants",         away:"Royal Challengers Bengaluru", homeShort:"LSG", awayShort:"RCB", venue:"Lucknow",   matchType:"evening", streamUrl:STREAM_URL },
-    { id:51, date:"08/05/26", day:"Fri", home:"Delhi Capitals",               away:"Kolkata Knight Riders",       homeShort:"DC",  awayShort:"KKR", venue:"Delhi",     matchType:"evening", streamUrl:STREAM_URL },
-    { id:52, date:"09/05/26", day:"Sat", home:"Rajasthan Royals",             away:"Gujarat Titans",              homeShort:"RR",  awayShort:"GT",  venue:"Jaipur",    matchType:"evening", streamUrl:STREAM_URL },
-    { id:53, date:"10/05/26", day:"Sun", home:"Chennai Super Kings",          away:"Lucknow Super Giants",        homeShort:"CSK", awayShort:"LSG", venue:"Chennai",   matchType:"day",     streamUrl:STREAM_URL },
-    { id:54, date:"10/05/26", day:"Sun", home:"Royal Challengers Bengaluru",  away:"Mumbai Indians",              homeShort:"RCB", awayShort:"MI",  venue:"Raipur",    matchType:"evening", streamUrl:STREAM_URL },
-    { id:55, date:"11/05/26", day:"Mon", home:"Punjab Kings",                 away:"Delhi Capitals",              homeShort:"PBKS",awayShort:"DC",  venue:"Dharamshala", matchType:"evening", streamUrl:STREAM_URL },
-    { id:56, date:"12/05/26", day:"Tue", home:"Gujarat Titans",               away:"Sunrisers Hyderabad",         homeShort:"GT",  awayShort:"SRH", venue:"Ahmedabad", matchType:"evening", streamUrl:STREAM_URL },
-    { id:57, date:"13/05/26", day:"Wed", home:"Royal Challengers Bengaluru",  away:"Kolkata Knight Riders",       homeShort:"RCB", awayShort:"KKR", venue:"Raipur",    matchType:"evening", streamUrl:STREAM_URL },
-    { id:58, date:"14/05/26", day:"Thu", home:"Punjab Kings",                 away:"Mumbai Indians",              homeShort:"PBKS",awayShort:"MI",  venue:"Dharamshala", matchType:"evening", streamUrl:STREAM_URL },
-    { id:59, date:"15/05/26", day:"Fri", home:"Lucknow Super Giants",         away:"Chennai Super Kings",         homeShort:"LSG", awayShort:"CSK", venue:"Lucknow",   matchType:"evening", streamUrl:STREAM_URL },
-    { id:60, date:"16/05/26", day:"Sat", home:"Kolkata Knight Riders",        away:"Gujarat Titans",              homeShort:"KKR", awayShort:"GT",  venue:"Kolkata",   matchType:"evening", streamUrl:STREAM_URL },
-    { id:61, date:"17/05/26", day:"Sun", home:"Punjab Kings",                 away:"Royal Challengers Bengaluru", homeShort:"PBKS",awayShort:"RCB", venue:"Dharamshala", matchType:"day",     streamUrl:STREAM_URL },
-    { id:62, date:"17/05/26", day:"Sun", home:"Delhi Capitals",               away:"Rajasthan Royals",            homeShort:"DC",  awayShort:"RR",  venue:"Delhi",     matchType:"evening", streamUrl:STREAM_URL },
-    { id:63, date:"18/05/26", day:"Mon", home:"Chennai Super Kings",          away:"Sunrisers Hyderabad",         homeShort:"CSK", awayShort:"SRH", venue:"Chennai",   matchType:"evening", streamUrl:STREAM_URL },
-    { id:64, date:"19/05/26", day:"Tue", home:"Rajasthan Royals",             away:"Lucknow Super Giants",        homeShort:"RR",  awayShort:"LSG", venue:"Jaipur",    matchType:"evening", streamUrl:STREAM_URL },
-    { id:65, date:"20/05/26", day:"Wed", home:"Kolkata Knight Riders",        away:"Mumbai Indians",              homeShort:"KKR", awayShort:"MI",  venue:"Kolkata",   matchType:"evening", streamUrl:STREAM_URL },
-    { id:66, date:"21/05/26", day:"Thu", home:"Chennai Super Kings",          away:"Gujarat Titans",              homeShort:"CSK", awayShort:"GT",  venue:"Chennai",   matchType:"evening", streamUrl:STREAM_URL },
-    { id:67, date:"22/05/26", day:"Fri", home:"Sunrisers Hyderabad",          away:"Royal Challengers Bengaluru", homeShort:"SRH", awayShort:"RCB", venue:"Hyderabad", matchType:"evening", streamUrl:STREAM_URL },
-    { id:68, date:"23/05/26", day:"Sat", home:"Lucknow Super Giants",         away:"Punjab Kings",                homeShort:"LSG", awayShort:"PBKS",venue:"Lucknow",   matchType:"evening", streamUrl:STREAM_URL },
-    { id:69, date:"24/05/26", day:"Sun", home:"Mumbai Indians",               away:"Rajasthan Royals",            homeShort:"MI",  awayShort:"RR",  venue:"Mumbai",    matchType:"day",     streamUrl:STREAM_URL },
-    { id:70, date:"24/05/26", day:"Sun", home:"Kolkata Knight Riders",        away:"Delhi Capitals",              homeShort:"KKR", awayShort:"DC",  venue:"Kolkata",   matchType:"evening", streamUrl:STREAM_URL }
+    { id:1,  date:"28/03/26", day:"Sat", home:"Royal Challengers Bengaluru", away:"Sunrisers Hyderabad",         homeShort:"RCB", awayShort:"SRH", venue:"Bengaluru", matchType:"evening", streamUrls:STREAMS },
+    { id:2,  date:"29/03/26", day:"Sun", home:"Mumbai Indians",               away:"Kolkata Knight Riders",       homeShort:"MI",  awayShort:"KKR", venue:"Mumbai",    matchType:"evening", streamUrls:STREAMS },
+    { id:3,  date:"30/03/26", day:"Mon", home:"Rajasthan Royals",             away:"Chennai Super Kings",         homeShort:"RR",  awayShort:"CSK", venue:"Guwahati",  matchType:"evening", streamUrls:STREAMS },
+    { id:4,  date:"31/03/26", day:"Tue", home:"Punjab Kings",                 away:"Gujarat Titans",              homeShort:"PBKS",awayShort:"GT",  venue:"New Chandigarh", matchType:"evening", streamUrls:STREAMS },
+    { id:5,  date:"01/04/26", day:"Wed", home:"Lucknow Super Giants",         away:"Delhi Capitals",              homeShort:"LSG", awayShort:"DC",  venue:"Lucknow",   matchType:"evening", streamUrls:STREAMS },
+    { id:6,  date:"02/04/26", day:"Thu", home:"Kolkata Knight Riders",        away:"Sunrisers Hyderabad",         homeShort:"KKR", awayShort:"SRH", venue:"Kolkata",   matchType:"evening", streamUrls:STREAMS },
+    { id:7,  date:"03/04/26", day:"Fri", home:"Chennai Super Kings",          away:"Punjab Kings",                homeShort:"CSK", awayShort:"PBKS",venue:"Chennai",   matchType:"evening", streamUrls:STREAMS },
+    { id:8,  date:"04/04/26", day:"Sat", home:"Delhi Capitals",               away:"Mumbai Indians",              homeShort:"DC",  awayShort:"MI",  venue:"Delhi",     matchType:"day",     streamUrls:STREAMS },
+    { id:9,  date:"04/04/26", day:"Sat", home:"Gujarat Titans",               away:"Rajasthan Royals",            homeShort:"GT",  awayShort:"RR",  venue:"Ahmedabad", matchType:"evening", streamUrls:STREAMS },
+    { id:10, date:"05/04/26", day:"Sun", home:"Sunrisers Hyderabad",          away:"Lucknow Super Giants",        homeShort:"SRH", awayShort:"LSG", venue:"Hyderabad", matchType:"day",     streamUrls:STREAMS },
+    { id:11, date:"05/04/26", day:"Sun", home:"Royal Challengers Bengaluru",  away:"Chennai Super Kings",         homeShort:"RCB", awayShort:"CSK", venue:"Bengaluru", matchType:"evening", streamUrls:STREAMS },
+    { id:12, date:"06/04/26", day:"Mon", home:"Kolkata Knight Riders",        away:"Punjab Kings",                homeShort:"KKR", awayShort:"PBKS",venue:"Kolkata",   matchType:"evening", streamUrls:STREAMS },
+    { id:13, date:"07/04/26", day:"Tue", home:"Rajasthan Royals",             away:"Mumbai Indians",              homeShort:"RR",  awayShort:"MI",  venue:"Guwahati",  matchType:"evening", streamUrls:STREAMS },
+    { id:14, date:"08/04/26", day:"Wed", home:"Delhi Capitals",               away:"Gujarat Titans",              homeShort:"DC",  awayShort:"GT",  venue:"Delhi",     matchType:"evening", streamUrls:STREAMS },
+    { id:15, date:"09/04/26", day:"Thu", home:"Kolkata Knight Riders",        away:"Lucknow Super Giants",        homeShort:"KKR", awayShort:"LSG", venue:"Kolkata",   matchType:"evening", streamUrls:STREAMS },
+    { id:16, date:"10/04/26", day:"Fri", home:"Rajasthan Royals",             away:"Royal Challengers Bengaluru", homeShort:"RR",  awayShort:"RCB", venue:"Guwahati",  matchType:"evening", streamUrls:STREAMS },
+    { id:17, date:"11/04/26", day:"Sat", home:"Punjab Kings",                 away:"Sunrisers Hyderabad",         homeShort:"PBKS",awayShort:"SRH", venue:"New Chandigarh", matchType:"day",     streamUrls:STREAMS },
+    { id:18, date:"11/04/26", day:"Sat", home:"Chennai Super Kings",          away:"Delhi Capitals",              homeShort:"CSK", awayShort:"DC",  venue:"Chennai",   matchType:"evening", streamUrls:STREAMS },
+    { id:19, date:"12/04/26", day:"Sun", home:"Lucknow Super Giants",         away:"Gujarat Titans",              homeShort:"LSG", awayShort:"GT",  venue:"Lucknow",   matchType:"day",     streamUrls:STREAMS },
+    { id:20, date:"12/04/26", day:"Sun", home:"Mumbai Indians",               away:"Royal Challengers Bengaluru", homeShort:"MI",  awayShort:"RCB", venue:"Mumbai",    matchType:"evening", streamUrls:STREAMS },
+    { id:21, date:"13/04/26", day:"Mon", home:"Sunrisers Hyderabad",          away:"Rajasthan Royals",            homeShort:"SRH", awayShort:"RR",  venue:"Hyderabad", matchType:"evening", streamUrls:STREAMS },
+    { id:22, date:"14/04/26", day:"Tue", home:"Chennai Super Kings",          away:"Kolkata Knight Riders",       homeShort:"CSK", awayShort:"KKR", venue:"Chennai",   matchType:"evening", streamUrls:STREAMS },
+    { id:23, date:"15/04/26", day:"Wed", home:"Royal Challengers Bengaluru",  away:"Lucknow Super Giants",        homeShort:"RCB", awayShort:"LSG", venue:"Bengaluru", matchType:"evening", streamUrls:STREAMS },
+    { id:24, date:"16/04/26", day:"Thu", home:"Mumbai Indians",               away:"Punjab Kings",                homeShort:"MI",  awayShort:"PBKS",venue:"Mumbai",    matchType:"evening", streamUrls:STREAMS },
+    { id:25, date:"17/04/26", day:"Fri", home:"Gujarat Titans",               away:"Kolkata Knight Riders",       homeShort:"GT",  awayShort:"KKR", venue:"Ahmedabad", matchType:"evening", streamUrls:STREAMS },
+    { id:26, date:"18/04/26", day:"Sat", home:"Royal Challengers Bengaluru",  away:"Delhi Capitals",              homeShort:"RCB", awayShort:"DC",  venue:"Bengaluru", matchType:"day",     streamUrls:STREAMS },
+    { id:27, date:"18/04/26", day:"Sat", home:"Sunrisers Hyderabad",          away:"Chennai Super Kings",         homeShort:"SRH", awayShort:"CSK", venue:"Hyderabad", matchType:"evening", streamUrls:STREAMS },
+    { id:28, date:"19/04/26", day:"Sun", home:"Kolkata Knight Riders",        away:"Rajasthan Royals",            homeShort:"KKR", awayShort:"RR",  venue:"Kolkata",   matchType:"day",     streamUrls:STREAMS },
+    { id:29, date:"19/04/26", day:"Sun", home:"Punjab Kings",                 away:"Lucknow Super Giants",        homeShort:"PBKS",awayShort:"LSG", venue:"New Chandigarh", matchType:"evening", streamUrls:STREAMS },
+    { id:30, date:"20/04/26", day:"Mon", home:"Gujarat Titans",               away:"Mumbai Indians",              homeShort:"GT",  awayShort:"MI",  venue:"Ahmedabad", matchType:"evening", streamUrls:STREAMS },
+    { id:31, date:"21/04/26", day:"Tue", home:"Sunrisers Hyderabad",          away:"Delhi Capitals",              homeShort:"SRH", awayShort:"DC",  venue:"Hyderabad", matchType:"evening", streamUrls:STREAMS },
+    { id:32, date:"22/04/26", day:"Wed", home:"Lucknow Super Giants",         away:"Rajasthan Royals",            homeShort:"LSG", awayShort:"RR",  venue:"Lucknow",   matchType:"evening", streamUrls:STREAMS },
+    { id:33, date:"23/04/26", day:"Thu", home:"Mumbai Indians",               away:"Chennai Super Kings",         homeShort:"MI",  awayShort:"CSK", venue:"Mumbai",    matchType:"evening", streamUrls:STREAMS },
+    { id:34, date:"24/04/26", day:"Fri", home:"Royal Challengers Bengaluru",  away:"Gujarat Titans",              homeShort:"RCB", awayShort:"GT",  venue:"Bengaluru", matchType:"evening", streamUrls:STREAMS },
+    { id:35, date:"25/04/26", day:"Sat", home:"Delhi Capitals",               away:"Punjab Kings",                homeShort:"DC",  awayShort:"PBKS",venue:"Delhi",     matchType:"day",     streamUrls:STREAMS },
+    { id:36, date:"25/04/26", day:"Sat", home:"Rajasthan Royals",             away:"Sunrisers Hyderabad",         homeShort:"RR",  awayShort:"SRH", venue:"Jaipur",    matchType:"evening", streamUrls:STREAMS },
+    { id:37, date:"26/04/26", day:"Sun", home:"Gujarat Titans",               away:"Chennai Super Kings",         homeShort:"GT",  awayShort:"CSK", venue:"Ahmedabad", matchType:"day",     streamUrls:STREAMS },
+    { id:38, date:"26/04/26", day:"Sun", home:"Lucknow Super Giants",         away:"Kolkata Knight Riders",       homeShort:"LSG", awayShort:"KKR", venue:"Lucknow",   matchType:"evening", streamUrls:STREAMS },
+    { id:39, date:"27/04/26", day:"Mon", home:"Delhi Capitals",               away:"Royal Challengers Bengaluru", homeShort:"DC",  awayShort:"RCB", venue:"Delhi",     matchType:"evening", streamUrls:STREAMS },
+    { id:40, date:"28/04/26", day:"Tue", home:"Punjab Kings",                 away:"Rajasthan Royals",            homeShort:"PBKS",awayShort:"RR",  venue:"New Chandigarh", matchType:"evening", streamUrls:STREAMS },
+    { id:41, date:"29/04/26", day:"Wed", home:"Mumbai Indians",               away:"Sunrisers Hyderabad",         homeShort:"MI",  awayShort:"SRH", venue:"Mumbai",    matchType:"evening", streamUrls:STREAMS },
+    { id:42, date:"30/04/26", day:"Thu", home:"Gujarat Titans",               away:"Royal Challengers Bengaluru", homeShort:"GT",  awayShort:"RCB", venue:"Ahmedabad", matchType:"evening", streamUrls:STREAMS },
+    { id:43, date:"01/05/26", day:"Fri", home:"Rajasthan Royals",             away:"Delhi Capitals",              homeShort:"RR",  awayShort:"DC",  venue:"Jaipur",    matchType:"evening", streamUrls:STREAMS },
+    { id:44, date:"02/05/26", day:"Sat", home:"Chennai Super Kings",          away:"Mumbai Indians",              homeShort:"CSK", awayShort:"MI",  venue:"Chennai",   matchType:"evening", streamUrls:STREAMS },
+    { id:45, date:"03/05/26", day:"Sun", home:"Sunrisers Hyderabad",          away:"Kolkata Knight Riders",       homeShort:"SRH", awayShort:"KKR", venue:"Hyderabad", matchType:"day",     streamUrls:STREAMS },
+    { id:46, date:"03/05/26", day:"Sun", home:"Gujarat Titans",               away:"Punjab Kings",                homeShort:"GT",  awayShort:"PBKS",venue:"Ahmedabad", matchType:"evening", streamUrls:STREAMS },
+    { id:47, date:"04/05/26", day:"Mon", home:"Mumbai Indians",               away:"Lucknow Super Giants",        homeShort:"MI",  awayShort:"LSG", venue:"Mumbai",    matchType:"evening", streamUrls:STREAMS },
+    { id:48, date:"05/05/26", day:"Tue", home:"Delhi Capitals",               away:"Chennai Super Kings",         homeShort:"DC",  awayShort:"CSK", venue:"Delhi",     matchType:"evening", streamUrls:STREAMS },
+    { id:49, date:"06/05/26", day:"Wed", home:"Sunrisers Hyderabad",          away:"Punjab Kings",                homeShort:"SRH", awayShort:"PBKS",venue:"Hyderabad", matchType:"evening", streamUrls:STREAMS },
+    { id:50, date:"07/05/26", day:"Thu", home:"Lucknow Super Giants",         away:"Royal Challengers Bengaluru", homeShort:"LSG", awayShort:"RCB", venue:"Lucknow",   matchType:"evening", streamUrls:STREAMS },
+    { id:51, date:"08/05/26", day:"Fri", home:"Delhi Capitals",               away:"Kolkata Knight Riders",       homeShort:"DC",  awayShort:"KKR", venue:"Delhi",     matchType:"evening", streamUrls:STREAMS },
+    { id:52, date:"09/05/26", day:"Sat", home:"Rajasthan Royals",             away:"Gujarat Titans",              homeShort:"RR",  awayShort:"GT",  venue:"Jaipur",    matchType:"evening", streamUrls:STREAMS },
+    { id:53, date:"10/05/26", day:"Sun", home:"Chennai Super Kings",          away:"Lucknow Super Giants",        homeShort:"CSK", awayShort:"LSG", venue:"Chennai",   matchType:"day",     streamUrls:STREAMS },
+    { id:54, date:"10/05/26", day:"Sun", home:"Royal Challengers Bengaluru",  away:"Mumbai Indians",              homeShort:"RCB", awayShort:"MI",  venue:"Raipur",    matchType:"evening", streamUrls:STREAMS },
+    { id:55, date:"11/05/26", day:"Mon", home:"Punjab Kings",                 away:"Delhi Capitals",              homeShort:"PBKS",awayShort:"DC",  venue:"Dharamshala", matchType:"evening", streamUrls:STREAMS },
+    { id:56, date:"12/05/26", day:"Tue", home:"Gujarat Titans",               away:"Sunrisers Hyderabad",         homeShort:"GT",  awayShort:"SRH", venue:"Ahmedabad", matchType:"evening", streamUrls:STREAMS },
+    { id:57, date:"13/05/26", day:"Wed", home:"Royal Challengers Bengaluru",  away:"Kolkata Knight Riders",       homeShort:"RCB", awayShort:"KKR", venue:"Raipur",    matchType:"evening", streamUrls:STREAMS },
+    { id:58, date:"14/05/26", day:"Thu", home:"Punjab Kings",                 away:"Mumbai Indians",              homeShort:"PBKS",awayShort:"MI",  venue:"Dharamshala", matchType:"evening", streamUrls:STREAMS },
+    { id:59, date:"15/05/26", day:"Fri", home:"Lucknow Super Giants",         away:"Chennai Super Kings",         homeShort:"LSG", awayShort:"CSK", venue:"Lucknow",   matchType:"evening", streamUrls:STREAMS },
+    { id:60, date:"16/05/26", day:"Sat", home:"Kolkata Knight Riders",        away:"Gujarat Titans",              homeShort:"KKR", awayShort:"GT",  venue:"Kolkata",   matchType:"evening", streamUrls:STREAMS },
+    { id:61, date:"17/05/26", day:"Sun", home:"Punjab Kings",                 away:"Royal Challengers Bengaluru", homeShort:"PBKS",awayShort:"RCB", venue:"Dharamshala", matchType:"day",     streamUrls:STREAMS },
+    { id:62, date:"17/05/26", day:"Sun", home:"Delhi Capitals",               away:"Rajasthan Royals",            homeShort:"DC",  awayShort:"RR",  venue:"Delhi",     matchType:"evening", streamUrls:STREAMS },
+    { id:63, date:"18/05/26", day:"Mon", home:"Chennai Super Kings",          away:"Sunrisers Hyderabad",         homeShort:"CSK", awayShort:"SRH", venue:"Chennai",   matchType:"evening", streamUrls:STREAMS },
+    { id:64, date:"19/05/26", day:"Tue", home:"Rajasthan Royals",             away:"Lucknow Super Giants",        homeShort:"RR",  awayShort:"LSG", venue:"Jaipur",    matchType:"evening", streamUrls:STREAMS },
+    { id:65, date:"20/05/26", day:"Wed", home:"Kolkata Knight Riders",        away:"Mumbai Indians",              homeShort:"KKR", awayShort:"MI",  venue:"Kolkata",   matchType:"evening", streamUrls:STREAMS },
+    { id:66, date:"21/05/26", day:"Thu", home:"Chennai Super Kings",          away:"Gujarat Titans",              homeShort:"CSK", awayShort:"GT",  venue:"Chennai",   matchType:"evening", streamUrls:STREAMS },
+    { id:67, date:"22/05/26", day:"Fri", home:"Sunrisers Hyderabad",          away:"Royal Challengers Bengaluru", homeShort:"SRH", awayShort:"RCB", venue:"Hyderabad", matchType:"evening", streamUrls:STREAMS },
+    { id:68, date:"23/05/26", day:"Sat", home:"Lucknow Super Giants",         away:"Punjab Kings",                homeShort:"LSG", awayShort:"PBKS",venue:"Lucknow",   matchType:"evening", streamUrls:STREAMS },
+    { id:69, date:"24/05/26", day:"Sun", home:"Mumbai Indians",               away:"Rajasthan Royals",            homeShort:"MI",  awayShort:"RR",  venue:"Mumbai",    matchType:"day",     streamUrls:STREAMS },
+    { id:70, date:"24/05/26", day:"Sun", home:"Kolkata Knight Riders",        away:"Delhi Capitals",              homeShort:"KKR", awayShort:"DC",  venue:"Kolkata",   matchType:"evening", streamUrls:STREAMS }
   ]
 };
 
@@ -372,6 +375,9 @@ function SayanBadge({ isLive }) {
 
 // ─── Player Modal ─────────────────────────────────────────────────────────────
 function PlayerModal({ match, onClose }) {
+  const [channelIdx, setChannelIdx] = useState(0);
+  const streams = match.streamUrls || STREAMS;
+  const currentStream = streams[channelIdx];
   return (
     <div style={{ position:"fixed",inset:0,zIndex:1000,background:"#000000f2",display:"flex",flexDirection:"column" }} onClick={onClose}>
       <div style={{ background:"#0a1020",borderBottom:"1px solid #1a2535",padding:"10px 14px",display:"flex",alignItems:"center",justifyContent:"space-between",flexShrink:0 }}
@@ -382,14 +388,28 @@ function PlayerModal({ match, onClose }) {
             <div style={{ color:"#fff",fontWeight:800,fontSize:13,fontFamily:"'Bebas Neue',sans-serif",letterSpacing:1 }}>
               {match.homeShort} <span style={{ color:"#f97316" }}>VS</span> {match.awayShort}
             </div>
-            <div style={{ display:"flex",gap:6,alignItems:"center" }}><LiveBadge/><span style={{ color:"var(--text-muted)",fontSize:10 }}>Star Sports 1 Hindi</span></div>
+            <div style={{ display:"flex",gap:6,alignItems:"center" }}><LiveBadge/><span style={{ color:"var(--text-muted)",fontSize:10 }}>{currentStream.name}</span></div>
           </div>
           <TeamLogo team={match.awayShort} size={32}/>
         </div>
-        <button onClick={onClose} style={{ background:"#1a2535",border:"1px solid #243040",color:"#8090a0",borderRadius:9,padding:"5px 14px",cursor:"pointer",fontSize:13,fontWeight:700 }}>✕</button>
+        <div style={{ display:"flex",alignItems:"center",gap:6 }}>
+          {/* Channel selector */}
+          <div style={{ display:"flex",gap:3 }}>
+            {streams.map((s, i) => (
+              <button key={i} onClick={() => setChannelIdx(i)} style={{
+                background: channelIdx === i ? "#f97316" : "#1a2535",
+                border: channelIdx === i ? "1px solid #f97316" : "1px solid #243040",
+                color: channelIdx === i ? "#fff" : "#8090a0",
+                borderRadius: 7, padding: "4px 8px", cursor: "pointer",
+                fontSize: 9, fontWeight: 700, whiteSpace: "nowrap"
+              }}>{s.name.replace("Star Sports 1 ", "")}</button>
+            ))}
+          </div>
+          <button onClick={onClose} style={{ background:"#1a2535",border:"1px solid #243040",color:"#8090a0",borderRadius:9,padding:"5px 14px",cursor:"pointer",fontSize:13,fontWeight:700 }}>✕</button>
+        </div>
       </div>
       <div style={{ flex:1,overflow:"hidden" }} onClick={e=>e.stopPropagation()}>
-        <iframe src={match.streamUrl} style={{ width:"100%",height:"100%",border:"none" }}
+        <iframe src={currentStream.url} style={{ width:"100%",height:"100%",border:"none" }}
           allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
           allowFullScreen title="Live Stream"
           sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-presentation"/>
@@ -397,7 +417,7 @@ function PlayerModal({ match, onClose }) {
       <div style={{ background:"#070c14",borderTop:"1px solid #0d1a28",padding:"6px 14px",display:"flex",justifyContent:"space-between",alignItems:"center",flexShrink:0 }}
         onClick={e=>e.stopPropagation()}>
         <span style={{ color:"#1e3040",fontSize:10 }}>Powered by <span style={{ color:"#f97316",fontWeight:700 }}>SAYAN-IPTV</span></span>
-        <a href={match.streamUrl} target="_blank" rel="noopener noreferrer" style={{ color:"#2a5a80",fontSize:10,textDecoration:"none",fontWeight:600 }}>Open in new tab ↗</a>
+        <a href={currentStream.url} target="_blank" rel="noopener noreferrer" style={{ color:"#2a5a80",fontSize:10,textDecoration:"none",fontWeight:600 }}>Open in new tab ↗</a>
       </div>
     </div>
   );
@@ -594,7 +614,7 @@ export default function App() {
               <div>
                 <div style={{ display:"flex",alignItems:"center",gap:6,marginBottom:3 }}><LiveBadge/></div>
                 <div style={{ color:"#fff",fontWeight:800,fontSize:13 }}>{liveNow[0].homeShort} vs {liveNow[0].awayShort}</div>
-                <div style={{ color:"rgba(255,255,255,0.6)",fontSize:10 }}>Star Sports 1 Hindi · {liveNow[0].matchType==="day" ? "2:00 PM – 8:00 PM" : "6:00 PM – 2:00 AM"} IST</div>
+                <div style={{ color:"rgba(255,255,255,0.6)",fontSize:10 }}>Hindi HD · English HD · {liveNow[0].matchType==="day" ? "2:00 PM – 8:00 PM" : "6:00 PM – 2:00 AM"} IST</div>
               </div>
               <TeamLogo team={liveNow[0].awayShort} size={36}/>
             </div>
@@ -634,7 +654,7 @@ export default function App() {
         }
 
         <div style={{ marginTop:24,textAlign:"center",color:"var(--text-muted)",fontSize:10,lineHeight:2 }}>
-          <span style={{ color:"#f97316",fontWeight:800 }}>SAYAN-IPL</span> · Star Sports 1 Hindi<br/>
+          <span style={{ color:"#f97316",fontWeight:800 }}>SAYAN-IPL</span> · Star Sports 1 Hindi HD · Star Sports 1 English HD<br/>
           Watch Live button appears automatically during match hours
         </div>
       </div>
